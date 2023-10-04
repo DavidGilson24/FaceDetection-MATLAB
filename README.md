@@ -22,7 +22,7 @@ This project utilizes MATLAB's computer vision capabilities to detect faces in r
 
 ## Prerequisites
 
-- MATLAB (Version XX.X or later)
+- MATLAB (Version R2019b or later)
 - Computer Vision Toolbox for MATLAB
 - A working webcam connected to your computer
 
