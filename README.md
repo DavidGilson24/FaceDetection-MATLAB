@@ -23,7 +23,7 @@ This project utilizes MATLAB's computer vision capabilities to detect faces in r
 ## Prerequisites
 
 - MATLAB (Version R2019b or later)
-- MATLAB Support Package for USB Webcams and Image Acquisition Toolbox Support Package for OS Generic Video Interface
+- Image Acquisition Toolbox Support Package for OS Generic Video Interface
 - Computer Vision Toolbox for MATLAB
 - A working webcam connected to your computer
 
