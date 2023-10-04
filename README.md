@@ -10,7 +10,7 @@
 - [License](#license)
 - [Acknowledgments](#acknowledgments)
 
-## Description
+## Description test
 
 This project utilizes MATLAB's computer vision capabilities to detect faces in real-time from a webcam feed. Once a face is identified within the video frame, it is highlighted with a bounding square. As the face moves, the square dynamically adjusts its position to continuously track and encircle the face, ensuring the subject remains within the frame. This project showcases the combination of real-time video processing with face detection algorithms, paving the way for advanced facial recognition technologies.
 
