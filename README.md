@@ -55,7 +55,6 @@ This project is licensed under the MIT License - see the LICENSE.md file for det
 ## Acknowledgments
 
 - MATLAB's Computer Vision Toolbox for providing the necessary tools and algorithms.
-- [Any other acknowledgments or resources you used]
 
 
 **Note**: This project is a starting point for facial recognition. Further refinements and optimizations can be made based on specific requirements and use-cases.
