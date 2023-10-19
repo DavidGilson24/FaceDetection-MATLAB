@@ -2,7 +2,7 @@ clear all;
 close all;
 
 faceCam = webcam(); %initializing webcam object
-faceCam.Resolution = '1280x720'; %setting resolution for the camera
+faceCam.Resolution = '640x360'; %setting resolution for the camera
 
 videoFrame = snapshot(faceCam); %snapshot function used to capture every single frame
 videoPlayer = vision.VideoPlayer('Position', [100 100 520 520]); % setting a frame for the video
@@ -21,6 +21,11 @@ while isRunning
     videoFrame = snapshot(faceCam);
     grayScale = rgb2gray(videoFrame);
     frameCount = frameCount + 1;
+    
+        % Run face detection every 10 frames
+    if mod(frameCount, 400) == 0
+        faceSquares = faceDetect.step(grayScale);  % may detect multiple faces
+    end
     
     faceSquares = faceDetect.step(grayScale);  % may detect multiple faces
     
@@ -84,4 +89,4 @@ release(videoPlayer);
 for i = 1:length(faceTrackers)
     release(faceTrackers{i});
 end
-release(faceDetect);
+release(faceDetect); 
