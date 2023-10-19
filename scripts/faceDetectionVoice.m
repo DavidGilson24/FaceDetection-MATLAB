@@ -18,7 +18,7 @@ frameCount = 0; % setting how long the frame detector should work
 prevFaceDetected = false; % Add this line
 
 % Audio recording setup
-recorder = audiorecorder(22050, 8, 1);
+recorder = audiorecorder(44100, 16, 1);
 isRecordingAudio = false;
 silenceThreshold = 0.01;
 checkDuration = 0.5; % duration between checks for silence
@@ -144,7 +144,6 @@ clear faceCam;
 release(videoPlayer);
 release(facePoints);
 release(faceDetect);
-
 
 
 
