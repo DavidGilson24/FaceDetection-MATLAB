@@ -1,6 +1,6 @@
 close all;
 
-% Video setup
+% video setup
 faceCam = webcam(); % initializing webcam object
 faceCam.Resolution = '640x360'; % setting resolution for the camera
 
@@ -17,7 +17,7 @@ frameCount = 0; % setting how long the frame detector should work
 
 prevFaceDetected = false; % Add this line
 
-% Audio recording setup
+% recording setup
 recorder = audiorecorder(44100, 16, 1);
 isRecordingAudio = false;
 silenceThreshold = 0.01;
@@ -30,7 +30,8 @@ while isRunning
     grayScale = rgb2gray(videoFrame);
     frameCount = frameCount + 1;
     
-    % Set marker color based on the number of points detected
+    % color based point detection to let the user know if the tracking is
+    % deprecated
     if numPoints >= 100
         markerColor = 'green';
     elseif numPoints >= 60
@@ -87,18 +88,14 @@ while isRunning
         end
     end
     
-    % Debug: Print number of detected points
     fprintf('Number of detected points: %d\n', numPoints);
     
     faceDetected = numPoints > 0;
 
     if faceDetected && ~prevFaceDetected && ~isRecordingAudio
-        % New face detected and not currently recording
         fprintf('Started recording audio...\n');
-        record(recorder); % start continuous recording
         isRecordingAudio = true;
     elseif ~faceDetected && isRecordingAudio
-        % Face is no longer detected but recording is active
         fprintf('Face is no longer detected. Stopping recording.\n');
         stop(recorder);
         audioFileName = sprintf('voiceMessage_%s.wav', datestr(now, 'yyyymmdd_HHMMSS'));
