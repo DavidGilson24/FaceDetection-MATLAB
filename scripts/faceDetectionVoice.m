@@ -8,7 +8,7 @@ videoFrame = snapshot(faceCam);
 videoPlayer = vision.VideoPlayer('Position', [100 100 520 520]); % setting a frame for the video
 
 faceDetect = vision.CascadeObjectDetector();
-facePoints = vision.PointTracker('MaxBidirectionalError', 2); % used to track the face points
+facePoints = vision.PointTracker('MaxBidirectionalError', 50); % used to track the face points
 
 % Variables for the while loop
 isRunning = true;
@@ -40,7 +40,7 @@ while isRunning
         markerColor = 'red';
     end
     
-    if numPoints < 15
+    if numPoints < 30
         faceSquare = faceDetect.step(grayScale);
         
         if ~isempty(faceSquare)
@@ -70,7 +70,7 @@ while isRunning
         
         numPoints = size(newPoints, 1);
         
-        if numPoints >= 15
+        if numPoints >= 30
             [xForm, oldPoints, newPoints] = estimateGeometricTransform(oldPoints, newPoints, 'similarity', 'MaxDistance', 4);
             
             square = transformPointsForward(xForm, square);
@@ -88,15 +88,17 @@ while isRunning
         end
     end
     
-    fprintf('Number of detected points: %d\n', numPoints);
+    % fprintf('Number of detected points: %d\n', numPoints);
     
     faceDetected = numPoints > 0;
 
     if faceDetected && ~prevFaceDetected && ~isRecordingAudio
-        fprintf('Started recording audio...\n');
+        % fprintf('Started recording audio...\n');
+        record(recorder); % start continuous recording
         isRecordingAudio = true;
     elseif ~faceDetected && isRecordingAudio
-        fprintf('Face is no longer detected. Stopping recording.\n');
+        % Face is no longer detected but recording is active
+        % fprintf('Face is no longer detected. Stopping recording.\n');
         stop(recorder);
         audioFileName = sprintf('voiceMessage_%s.wav', datestr(now, 'yyyymmdd_HHMMSS'));
         audiowrite(audioFileName, getaudiodata(recorder, 'double'), recorder.SampleRate);
